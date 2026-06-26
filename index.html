@@ -105,14 +105,14 @@
 <body class="antialiased selection:bg-brand-yellow selection:text-black">
 
     <nav id="navbar" class="fixed w-full z-50 h-24 flex items-center bg-transparent border-b border-transparent">
-        <div class="max-w-5xl mx-auto px-6 w-full flex items-center justify-between">
+        <div class="max-w-6xl mx-auto px-6 w-full flex items-center justify-between">
             <span class="text-xl font-black tracking-tighter text-white">SHUSHI<span
                     class="text-brand-yellow">.</span></span>
 
-            <div class="hidden md:flex gap-8 text-[10px] font-bold tracking-widest uppercase text-white">
-                <a href="#Home" class="hover:text-brand-yellow transition duration-300">Home</a>
-                <a href="#About" class="hover:text-brand-yellow transition duration-300">About</a>
-                <a href="#Projects" class="hover:text-brand-yellow transition duration-300">Projects</a>
+            <div class="hidden md:flex gap-10 text-[11px] font-bold tracking-widest uppercase text-white/80">
+                <a href="#Home" class="hover:text-brand-yellow transition-colors duration-300">Home</a>
+                <a href="#About" class="hover:text-brand-yellow transition-colors duration-300">About</a>
+                <a href="#Projects" class="hover:text-brand-yellow transition-colors duration-300">Projects</a>
             </div>
 
             <button id="menu-btn" class="md:hidden text-white focus:outline-none z-[60]">
@@ -135,24 +135,26 @@
     <section id="Home" class="min-h-screen flex flex-col items-center justify-center pt-20 px-6">
         <div class="relative group mb-8">
             <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-brand-yellow to-white/20 rounded-2xl opacity-30 blur group-hover:opacity-60 transition duration-500">
+                class="absolute -inset-0.5 bg-gradient-to-r from-brand-yellow to-white/20 rounded-full opacity-30 blur group-hover:opacity-60 transition duration-500">
             </div>
             <img src="./asset/img/v1.jpg" alt="Profile Picture"
-                class="w-40 h-45 rounded-2xl  object-top border border-white/10 relative z-10 hover:scale-[1.02] transition duration-500 shadow-2xl shadow-black/50">
+                class="w-40 h-40 rounded-full border border-white/10 relative z-10 hover:scale-[1.02] transition duration-500 shadow-2xl shadow-black/50">
         </div>
 
         <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-white uppercase text-gradient">SHUSHI</h1>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter text-white uppercase text-gradient"></h1>
+
         <div class="mt-6 flex flex-col items-center gap-4">
             <span
                 class="px-4 py-1 border border-emerald-900/50 bg-emerald-950/20 text-emerald-500 text-[10px] font-bold tracking-[0.2em] uppercase rounded-full">Web
                 & Mobile Developer</span>
 
-            <div class="flex flex-col items-center gap-6 mt-8 w-full max-w-2xl px-6">
+            <div class="flex flex-col items-center gap-6 mt-12 w-full max-w-3xl">
                 <span class="text-[9px] uppercase tracking-widest text-neutral-500 font-bold">Programming
                     Languages</span>
-                <div class="flex flex-wrap justify-center items-center gap-10 text-2xl text-white/50">
-                    <div class="tech-item"><i class="tech-icon fa-brands fa-js"></i><span
-                            class="tech-label">JavaScript</span></div>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-2xl text-white/50">
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-js"></i><span class="tech-label">JS</span>
+                    </div>
                     <div class="tech-item"><i class="tech-icon fa-brands fa-html5"></i><span
                             class="tech-label">HTML</span></div>
                     <div class="tech-item"><i class="tech-icon fa-brands fa-css3-alt"></i><span
@@ -170,40 +172,38 @@
         </div>
     </section>
 
-    <section id="About" class="py-20 px-6 max-w-5xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-white mb-4">ABOUT ME</h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass p-8 rounded-2xl">
-                <h3 class="text-white font-bold mb-4">Hello! I'm Vian.</h3>
-                <p class="text-neutral-400 text-sm leading-relaxed mb-6">I am currently taking a college degree at <span
-                        class="text-white font-bold">Far Eastern University - Institute of Technology (FEU Tech)</span>.
+    <section id="About" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-white text-2xl font-bold mb-4">Hello! I'm .</h3>
+                <p class="text-neutral-400 leading-relaxed mb-6">I am currently taking a college degree at <span
+                        class="text-brand-yellow font-bold">Far Eastern University - Institute of Technology (FEU
+                        Tech)</span>. I'm passionate about building scalable, user-centric web and mobile applications.
                 </p>
                 <a href="#"
-                    class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold bg-brand-yellow text-black px-6 py-3 rounded-lg hover:bg-white transition">Download
+                    class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold bg-brand-yellow text-black px-6 py-3 rounded-lg hover:bg-white transition-all">Download
                     CV <i class="fa-solid fa-download"></i></a>
             </div>
-            <div class="glass p-6 rounded-2xl">
-                <h3 class="text-white font-bold mb-6"><i class="fa-solid fa-user text-brand-yellow mr-2"></i> Personal
-                    Information</h3>
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-white text-xl font-bold mb-6"><i class="fa-solid fa-user text-brand-yellow mr-2"></i>
+                    Personal Information</h3>
                 <div class="space-y-4 text-sm">
                     <div class="flex justify-between border-b border-white/5 pb-2"><span
-                            class="text-neutral-500">Name:</span> <span class="text-white">Vian Rotciv DR Tibay</span>
+                            class="text-neutral-500">Name</span> <span class="text-white"> </span>
                     </div>
                     <div class="flex justify-between border-b border-white/5 pb-2"><span
-                            class="text-neutral-500">Phone:</span> <span class="text-white">(+63) 0955-433-6333</span>
+                            class="text-neutral-500">Phone</span> <span class="text-white">(+63) 0955-433-6333</span>
                     </div>
                     <div class="flex justify-between border-b border-white/5 pb-2"><span
-                            class="text-neutral-500">Email:</span> <span class="text-white">vtibay40@gmail.com</span>
+                            class="text-neutral-500">Email</span> <span class="text-white">40@gmail.com</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 px-6 border-t border-white/5 mt-20">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer class="py-12 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <p class="text-neutral-600 text-[10px] uppercase font-bold tracking-widest">&copy; 2026 SHUSHI. All rights
                 reserved.</p>
             <div class="flex gap-4 text-neutral-400">
