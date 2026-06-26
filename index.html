@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,23 +22,83 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #000000; color: #e5e5e5; }
-        .glass { background: #111111; border: 1px solid rgba(234, 170, 0, 0.1); }
-        .nav-compressed { height: 60px !important; background: rgba(0, 0, 0, 0.95); border-bottom: 1px solid rgba(234, 170, 0, 0.2); }
-        #navbar { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .text-gradient { background: linear-gradient(to right, #ffffff, #EAAA00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Tech Item Hover Effects */
-        .tech-item { position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease; }
-        .tech-icon { filter: grayscale(100%); transition: all 0.3s ease; }
-        .tech-item:hover .tech-icon { filter: grayscale(0%); transform: translateY(-5px); }
-        .tech-label { opacity: 0; transition: opacity 0.3s ease; font-size: 10px; font-weight: bold; margin-top: 5px; color: #EAAA00; }
-        .tech-item:hover .tech-label { opacity: 1; }
 
-        /* Mobile Menu Animation */
-        #mobile-menu { transition: opacity 0.3s ease-in-out, visibility 0.3s; }
-        .mobile-link { transition: all 0.3s ease; }
-        .mobile-link:hover { transform: scale(1.1); color: #EAAA00; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #000000;
+            color: #e5e5e5;
+        }
+
+        .glass {
+            background: #111111;
+            border: 1px solid rgba(234, 170, 0, 0.1);
+        }
+
+        .nav-compressed {
+            height: 60px !important;
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid rgba(234, 170, 0, 0.2);
+        }
+
+        #navbar {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #EAAA00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tech-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tech-icon {
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover .tech-icon {
+            filter: grayscale(0%);
+            transform: translateY(-5px);
+        }
+
+        .tech-label {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: 5px;
+            color: #EAAA00;
+        }
+
+        .tech-item:hover .tech-label {
+            opacity: 1;
+        }
+
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s;
+            pointer-events: none;
+        }
+
+        #mobile-menu.active {
+            pointer-events: auto;
+        }
+
+        .mobile-link {
+            transition: all 0.3s ease;
+        }
+
+        .mobile-link:hover {
+            transform: scale(1.1);
+            color: #EAAA00;
+        }
     </style>
 </head>
 
@@ -45,51 +106,65 @@
 
     <nav id="navbar" class="fixed w-full z-50 h-24 flex items-center bg-transparent border-b border-transparent">
         <div class="max-w-5xl mx-auto px-6 w-full flex items-center justify-between">
-            <span class="text-xl font-black tracking-tighter text-white">SHUSHI<span class="text-brand-yellow">.</span></span>
-            
-            <!-- Desktop Nav -->
+            <span class="text-xl font-black tracking-tighter text-white">SHUSHI<span
+                    class="text-brand-yellow">.</span></span>
+
             <div class="hidden md:flex gap-8 text-[10px] font-bold tracking-widest uppercase text-white">
                 <a href="#Home" class="hover:text-brand-yellow transition duration-300">Home</a>
                 <a href="#About" class="hover:text-brand-yellow transition duration-300">About</a>
                 <a href="#Projects" class="hover:text-brand-yellow transition duration-300">Projects</a>
             </div>
 
-            <!-- Hamburger Button -->
-            <button id="menu-btn" class="md:hidden text-white focus:outline-none z-50">
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none z-[60]">
                 <i class="fa-solid fa-bars text-2xl"></i>
             </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center gap-8 text-xl font-bold uppercase text-white opacity-0 invisible">
-        <button id="close-menu" class="absolute top-8 right-8 text-white"><i class="fa-solid fa-xmark text-3xl"></i></button>
-        <a href="#Home" class="mobile-link hover:text-brand-yellow transition">Home</a>
-        <a href="#About" class="mobile-link hover:text-brand-yellow transition">About</a>
-        <a href="#Projects" class="mobile-link hover:text-brand-yellow transition">Projects</a>
+    <div id="mobile-menu"
+        class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center gap-8 text-xl font-bold uppercase text-white opacity-0 invisible">
+        <button id="close-menu"
+            class="absolute top-8 right-8 text-white hover:rotate-90 transition-transform duration-300 z-[60]">
+            <i class="fa-solid fa-xmark text-3xl"></i>
+        </button>
+        <a href="#Home" class="mobile-link">Home</a>
+        <a href="#About" class="mobile-link">About</a>
+        <a href="#Projects" class="mobile-link">Projects</a>
     </div>
 
     <section id="Home" class="min-h-screen flex flex-col items-center justify-center pt-20 px-6">
         <div class="relative group mb-8">
-            <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-yellow to-white/20 rounded-2xl opacity-30 blur group-hover:opacity-60 transition duration-500"></div>
-            <!-- User requested exact img tag preserved -->
-            <img src="./asset/img/v1.jpg" alt="Profile Picture" class="w-40 h-45 rounded-2xl  object-top border border-white/10 relative z-10 hover:scale-[1.02] transition duration-500 shadow-2xl shadow-black/50">
+            <div
+                class="absolute -inset-0.5 bg-gradient-to-r from-brand-yellow to-white/20 rounded-2xl opacity-30 blur group-hover:opacity-60 transition duration-500">
+            </div>
+            <img src="./asset/img/v1.jpg" alt="Profile Picture"
+                class="w-40 h-45 rounded-2xl  object-top border border-white/10 relative z-10 hover:scale-[1.02] transition duration-500 shadow-2xl shadow-black/50">
         </div>
 
         <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-white uppercase text-gradient">SHUSHI</h1>
         <div class="mt-6 flex flex-col items-center gap-4">
-            <span class="px-4 py-1 border border-emerald-900/50 bg-emerald-950/20 text-emerald-500 text-[10px] font-bold tracking-[0.2em] uppercase rounded-full">Web & Mobile Developer</span>
-            
+            <span
+                class="px-4 py-1 border border-emerald-900/50 bg-emerald-950/20 text-emerald-500 text-[10px] font-bold tracking-[0.2em] uppercase rounded-full">Web
+                & Mobile Developer</span>
+
             <div class="flex flex-col items-center gap-6 mt-8 w-full max-w-2xl px-6">
-                <span class="text-[9px] uppercase tracking-widest text-neutral-500 font-bold">Programming Languages</span>
+                <span class="text-[9px] uppercase tracking-widest text-neutral-500 font-bold">Programming
+                    Languages</span>
                 <div class="flex flex-wrap justify-center items-center gap-10 text-2xl text-white/50">
-                    <div class="tech-item"><i class="tech-icon fa-brands fa-js"></i><span class="tech-label">JavaScript</span></div>
-                    <div class="tech-item"><i class="tech-icon fa-brands fa-html5"></i><span class="tech-label">HTML</span></div>
-                    <div class="tech-item"><i class="tech-icon fa-brands fa-css3-alt"></i><span class="tech-label">CSS</span></div>
-                    <div class="tech-item"><i class="tech-icon fa-brands fa-react"></i><span class="tech-label">React</span></div>
-                    <div class="tech-item"><i class="tech-icon fa-brands fa-swift"></i><span class="tech-label">Swift</span></div>
-                    <div class="tech-item"><i class="tech-icon fa-brands fa-java"></i><span class="tech-label">Java</span></div>
-                    <div class="tech-item"><i class="tech-icon fa-solid fa-c"></i><span class="tech-label">C++</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-js"></i><span
+                            class="tech-label">JavaScript</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-html5"></i><span
+                            class="tech-label">HTML</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-css3-alt"></i><span
+                            class="tech-label">CSS</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-react"></i><span
+                            class="tech-label">React</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-swift"></i><span
+                            class="tech-label">Swift</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-java"></i><span
+                            class="tech-label">Java</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-solid fa-c"></i><span class="tech-label">C++</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,38 +173,29 @@
     <section id="About" class="py-20 px-6 max-w-5xl mx-auto">
         <div class="text-center mb-16">
             <h2 class="text-3xl font-bold text-white mb-4">ABOUT ME</h2>
-            <p class="text-neutral-500 max-w-lg mx-auto text-sm">Dedicated web programmer passionate about developing sleek responsive experiences and high-quality utility architectures.</p>
         </div>
-        
         <div class="grid md:grid-cols-2 gap-8">
             <div class="glass p-8 rounded-2xl">
                 <h3 class="text-white font-bold mb-4">Hello! I'm Vian.</h3>
-                <p class="text-neutral-400 text-sm leading-relaxed mb-6">
-                    I am currently taking a college degree at <span class="text-white font-bold">Far Eastern University - Institute of Technology (FEU Tech)</span>, pursuing a Bachelor of Science in Information Technology, major in Web and Mobile Application Development.
+                <p class="text-neutral-400 text-sm leading-relaxed mb-6">I am currently taking a college degree at <span
+                        class="text-white font-bold">Far Eastern University - Institute of Technology (FEU Tech)</span>.
                 </p>
-                <p class="text-neutral-400 text-sm leading-relaxed mb-6">
-                    I enjoy building functional tools that streamline day-to-day work tasks. My primary goals are building fast interfaces, clean layouts, and mastering full-stack web architectures.
-                </p>
-                <a href="#" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold bg-brand-yellow text-black px-6 py-3 rounded-lg hover:bg-white transition">Download CV <i class="fa-solid fa-download"></i></a>
+                <a href="#"
+                    class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold bg-brand-yellow text-black px-6 py-3 rounded-lg hover:bg-white transition">Download
+                    CV <i class="fa-solid fa-download"></i></a>
             </div>
-
-            <div class="flex flex-col gap-6">
-                <div class="glass p-6 rounded-2xl">
-                    <h3 class="text-white font-bold mb-6 flex items-center gap-2"><i class="fa-solid fa-user text-brand-yellow"></i> Personal Information</h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-neutral-500">Name:</span> <span class="text-white">Vian Rotciv DR Tibay</span></div>
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-neutral-500">Phone:</span> <span class="text-white">(+63) 0955-433-6333</span></div>
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-neutral-500">Email:</span> <span class="text-white">vtibay40@gmail.com</span></div>
-                        <div class="flex justify-between"><span class="text-neutral-500">Location:</span> <span class="text-white">Manila, Philippines</span></div>
+            <div class="glass p-6 rounded-2xl">
+                <h3 class="text-white font-bold mb-6"><i class="fa-solid fa-user text-brand-yellow mr-2"></i> Personal
+                    Information</h3>
+                <div class="space-y-4 text-sm">
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span
+                            class="text-neutral-500">Name:</span> <span class="text-white">Vian Rotciv DR Tibay</span>
                     </div>
-                </div>
-
-                <div class="glass p-6 rounded-2xl">
-                    <h3 class="text-white font-bold mb-6 flex items-center gap-2"><i class="fa-solid fa-cube text-brand-yellow"></i> Hobbies & Interests</h3>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="flex flex-col items-center justify-center p-4 bg-neutral-900 rounded-xl text-neutral-400 hover:text-brand-yellow transition"><i class="fa-solid fa-gamepad text-xl mb-2"></i><span class="text-[9px] uppercase font-bold">Games</span></div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-neutral-900 rounded-xl text-neutral-400 hover:text-brand-yellow transition"><i class="fa-solid fa-headphones text-xl mb-2"></i><span class="text-[9px] uppercase font-bold">Music</span></div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-neutral-900 rounded-xl text-neutral-400 hover:text-brand-yellow transition"><i class="fa-solid fa-plane text-xl mb-2"></i><span class="text-[9px] uppercase font-bold">Travel</span></div>
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span
+                            class="text-neutral-500">Phone:</span> <span class="text-white">(+63) 0955-433-6333</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span
+                            class="text-neutral-500">Email:</span> <span class="text-white">vtibay40@gmail.com</span>
                     </div>
                 </div>
             </div>
@@ -138,49 +204,49 @@
 
     <footer class="py-12 px-6 border-t border-white/5 mt-20">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <p class="text-neutral-600 text-[10px] uppercase font-bold tracking-widest">&copy; 2026 SHUSHI. All rights reserved.</p>
+            <p class="text-neutral-600 text-[10px] uppercase font-bold tracking-widest">&copy; 2026 SHUSHI. All rights
+                reserved.</p>
             <div class="flex gap-4 text-neutral-400">
-                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-brands fa-discord"></i></a>
-                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-solid fa-envelope"></i></a>
-                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-brands fa-github"></i></a>
+                <a href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i
+                        class="fa-brands fa-discord"></i></a>
+                <a href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i
+                        class="fa-solid fa-envelope"></i></a>
+                <a href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i
+                        class="fa-brands fa-github"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Nav shrink effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('nav-compressed');
-            } else {
-                nav.classList.remove('nav-compressed');
-            }
-        });
-
-        // Mobile Menu Logic
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-menu');
         const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('invisible', 'opacity-0');
-            mobileMenu.classList.add('opacity-100', 'visible');
-        });
-
-        closeBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('opacity-100', 'visible');
-            mobileMenu.classList.add('invisible', 'opacity-0');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('opacity-100', 'visible');
+        const toggleMenu = (open) => {
+            if (open) {
+                mobileMenu.classList.remove('invisible', 'opacity-0');
+                mobileMenu.classList.add('active', 'opacity-100', 'visible');
+            } else {
+                mobileMenu.classList.remove('active', 'opacity-100', 'visible');
                 mobileMenu.classList.add('invisible', 'opacity-0');
-            });
+            }
+        };
+
+        menuBtn.addEventListener('click', () => toggleMenu(true));
+        closeBtn.addEventListener('click', () => toggleMenu(false));
+        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => toggleMenu(false)));
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('nav-compressed', window.scrollY > 50);
         });
     </script>
 </body>
+
 </html>
