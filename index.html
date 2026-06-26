@@ -1,664 +1,186 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vian Tibay - Portfolio</title>
-
-    <!-- Tailwind CSS CDN -->
+    <title>SHUSHI Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        tamaraw: {
-                            green: '#005A36', // FEU Tech Deep Green
-                            gold: '#EAAA00',  // FEU Tech Tamaraw Gold
-                            goldHover: '#C69200',
-                        },
-                        darkBg: '#090d16',
-                        cardBg: '#111827',
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 4s ease-in-out infinite',
+                        brand: { yellow: '#EAAA00', yellowHover: '#C69200' },
+                        darkBg: '#000000',
+                        cardBg: '#111111',
                     }
                 }
             }
         }
     </script>
-
-    <!-- Early declaration of image error fallback to prevent console reference errors during initial render -->
-    <script>
-        function handleProfileImageFallback(img) {
-            img.onerror = null; // Prevent infinite loops
-            img.src = 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&h=400&q=80';
-        }
-    </script>
-
-    <!-- FontAwesome for Premium Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Google Fonts for Modern Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #000000; color: #e5e5e5; }
+        .glass { background: #111111; border: 1px solid rgba(234, 170, 0, 0.1); }
+        .nav-compressed { height: 60px !important; background: rgba(0, 0, 0, 0.95); border-bottom: 1px solid rgba(234, 170, 0, 0.2); }
+        #navbar { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .text-gradient { background: linear-gradient(to right, #ffffff, #EAAA00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Tech Item Hover Effects */
+        .tech-item { position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease; }
+        .tech-icon { filter: grayscale(100%); transition: all 0.3s ease; }
+        .tech-item:hover .tech-icon { filter: grayscale(0%); transform: translateY(-5px); }
+        .tech-label { opacity: 0; transition: opacity 0.3s ease; font-size: 10px; font-weight: bold; margin-top: 5px; color: #EAAA00; }
+        .tech-item:hover .tech-label { opacity: 1; }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #090d16;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #EAAA00;
-        }
-
-        /* Floating Animation for Visual elements */
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .animate-float {
-            animation: float 5s ease-in-out infinite;
-        }
+        /* Mobile Menu Animation */
+        #mobile-menu { transition: opacity 0.3s ease-in-out, visibility 0.3s; }
+        .mobile-link { transition: all 0.3s ease; }
+        .mobile-link:hover { transform: scale(1.1); color: #EAAA00; }
     </style>
 </head>
 
-<body class="bg-darkBg text-slate-100 antialiased overflow-x-hidden selection:bg-tamaraw-gold selection:text-darkBg">
+<body class="antialiased selection:bg-brand-yellow selection:text-black">
 
-    <!-- MENUS & HEADER CONTAINER -->
-    <div class="fixed top-0 left-0 w-full z-50 transition-all duration-500" id="header-container">
-        <header
-            class="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between transition-all duration-500"
-            id="main-header">
-            <!-- Brand Logo -->
-            <div class="logo text-2xl md:text-3xl font-extrabold tracking-wider">
-                <a href="#Home"
-                    class="bg-gradient-to-r from-tamaraw-gold to-yellow-300 bg-clip-text text-transparent hover:opacity-80 transition duration-300">
-                    VRT<span class="text-white">.</span>
-                </a>
+    <nav id="navbar" class="fixed w-full z-50 h-24 flex items-center bg-transparent border-b border-transparent">
+        <div class="max-w-5xl mx-auto px-6 w-full flex items-center justify-between">
+            <span class="text-xl font-black tracking-tighter text-white">SHUSHI<span class="text-brand-yellow">.</span></span>
+            
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex gap-8 text-[10px] font-bold tracking-widest uppercase text-white">
+                <a href="#Home" class="hover:text-brand-yellow transition duration-300">Home</a>
+                <a href="#About" class="hover:text-brand-yellow transition duration-300">About</a>
+                <a href="#Projects" class="hover:text-brand-yellow transition duration-300">Projects</a>
             </div>
 
-            <!-- Desktop Nav System -->
-            <nav id="nav" class="hidden md:block">
-                <ul class="flex items-center space-x-8 text-xs font-bold tracking-widest text-slate-300">
-                    <li>
-                        <a href="#Home"
-                            class="nav-link relative py-2 transition-colors duration-300 hover:text-tamaraw-gold tracking-widest text-slate-100"
-                            data-section="Home">
-                            HOME
-                            <span
-                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-tamaraw-gold transition-all duration-300"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#About"
-                            class="nav-link relative py-2 transition-colors duration-300 hover:text-tamaraw-gold tracking-widest"
-                            data-section="About">
-                            ABOUT
-                            <span
-                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-tamaraw-gold transition-all duration-300"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#Projects"
-                            class="nav-link relative py-2 transition-colors duration-300 hover:text-tamaraw-gold tracking-widest"
-                            data-section="Projects">
-                            PROJECTS
-                            <span
-                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-tamaraw-gold transition-all duration-300"></span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <!-- Hamburger Button -->
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none z-50">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
 
-            <!-- Mobile Hamburger Buttons -->
-            <div class="nav-responsive md:hidden flex items-center">
-                <button onclick="mostrarOcultarMenu()"
-                    class="text-slate-300 hover:text-tamaraw-gold transition-colors focus:outline-none"
-                    aria-label="Toggle Navigation Menu">
-                    <i id="menu-icon-bars" class="fa-solid fa-bars text-2xl"></i>
-                    <i id="menu-icon-close" class="fa-solid fa-xmark text-2xl hidden"></i>
-                </button>
-            </div>
-        </header>
-
-        <!-- Dynamic Mobile Navigation Dropdown Menu -->
-        <nav id="mobile-nav"
-            class="hidden md:hidden bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 absolute top-full left-0 w-full shadow-2xl transition-all duration-300">
-            <ul class="px-8 py-6 space-y-4 text-center text-sm font-semibold tracking-wider">
-                <li>
-                    <a href="#Home" onclick="seleccionar('Home')"
-                        class="block py-3 text-slate-300 hover:text-tamaraw-gold border-b border-slate-800/50 transition duration-200">HOME</a>
-                </li>
-                <li>
-                    <a href="#About" onclick="seleccionar('About')"
-                        class="block py-3 text-slate-300 hover:text-tamaraw-gold border-b border-slate-800/50 transition duration-200">ABOUT</a>
-                </li>
-                <li>
-                    <a href="#Projects" onclick="seleccionar('Projects')"
-                        class="block py-3 text-slate-300 hover:text-tamaraw-gold transition duration-200">PROJECTS</a>
-                </li>
-            </ul>
-        </nav>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center gap-8 text-xl font-bold uppercase text-white opacity-0 invisible">
+        <button id="close-menu" class="absolute top-8 right-8 text-white"><i class="fa-solid fa-xmark text-3xl"></i></button>
+        <a href="#Home" class="mobile-link hover:text-brand-yellow transition">Home</a>
+        <a href="#About" class="mobile-link hover:text-brand-yellow transition">About</a>
+        <a href="#Projects" class="mobile-link hover:text-brand-yellow transition">Projects</a>
     </div>
 
-    <!-- HERO SECTION -->
-    <section id="Home" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
-        <!-- Modern Grid & Circle Accent Overlays -->
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,90,54,0.15),transparent_50%)]"></div>
-        <div
-            class="absolute top-1/4 right-1/4 w-96 h-96 bg-tamaraw-gold/10 rounded-full blur-[120px] pointer-events-none">
-        </div>
-        <div
-            class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-tamaraw-green/20 rounded-full blur-[150px] pointer-events-none">
+    <section id="Home" class="min-h-screen flex flex-col items-center justify-center pt-20 px-6">
+        <div class="relative group mb-8">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-yellow to-white/20 rounded-2xl opacity-30 blur group-hover:opacity-60 transition duration-500"></div>
+            <!-- User requested exact img tag preserved -->
+            <img src="./asset/img/v1.jpg" alt="Profile Picture" class="w-40 h-45 rounded-2xl  object-top border border-white/10 relative z-10 hover:scale-[1.02] transition duration-500 shadow-2xl shadow-black/50">
         </div>
 
-        <div class="container-banner relative z-10 max-w-4xl mx-auto text-center px-6 flex flex-col items-center">
-
-            <!-- Elegant Image Wrapper with Gold Pulse Border and Error Fallback handler -->
-            <div class="contenedor-img relative mb-8 animate-float">
-                <div
-                    class="absolute inset-0 rounded-full bg-gradient-to-tr from-tamaraw-green to-tamaraw-gold blur-md opacity-70 animate-pulse">
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-white uppercase text-gradient">SHUSHI</h1>
+        <div class="mt-6 flex flex-col items-center gap-4">
+            <span class="px-4 py-1 border border-emerald-900/50 bg-emerald-950/20 text-emerald-500 text-[10px] font-bold tracking-[0.2em] uppercase rounded-full">Web & Mobile Developer</span>
+            
+            <div class="flex flex-col items-center gap-6 mt-8 w-full max-w-2xl px-6">
+                <span class="text-[9px] uppercase tracking-widest text-neutral-500 font-bold">Programming Languages</span>
+                <div class="flex flex-wrap justify-center items-center gap-10 text-2xl text-white/50">
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-js"></i><span class="tech-label">JavaScript</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-html5"></i><span class="tech-label">HTML</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-css3-alt"></i><span class="tech-label">CSS</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-react"></i><span class="tech-label">React</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-swift"></i><span class="tech-label">Swift</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-brands fa-java"></i><span class="tech-label">Java</span></div>
+                    <div class="tech-item"><i class="tech-icon fa-solid fa-c"></i><span class="tech-label">C++</span></div>
                 </div>
-                <div
-                    class="relative w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-tamaraw-gold shadow-2xl bg-slate-800">
-                    <img id="profile-picture" src="./asset/img/v1.jpg" alt="Vian Tibay"
-                        class="w-full  " />
-                </div>
-            </div>
-
-            <!-- Typography Header -->
-            <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight mb-2">
-                <span
-                    class="block text-slate-300 text-lg md:text-xl font-bold tracking-[0.25em] text-tamaraw-gold uppercase mb-3">Hi,
-                    I am</span>
-                <span
-                    class="bg-gradient-to-r from-slate-100 via-white to-tamaraw-gold bg-clip-text text-transparent">VIAN
-                    TIBAY</span>
-            </h1>
-
-            <!-- Title & Institution Badge -->
-            <div class="flex flex-wrap justify-center items-center gap-3 mt-3 mb-8">
-                <span
-                    class="px-4 py-1.5 bg-tamaraw-green/30 text-emerald-400 border border-tamaraw-green/50 text-xs font-semibold tracking-wider uppercase rounded-full">
-                    Web & Mobile Developer
-                </span>
-                <span
-                    class="px-4 py-1.5 bg-slate-800/60 text-tamaraw-gold border border-slate-700/50 text-xs font-semibold tracking-wider uppercase rounded-full">
-                    FEU Tech Tamaraw 🔰
-                </span>
-            </div>
-
-            <!-- Custom Embed Audio Container styled elegantly -->
-            <div
-                class="redes w-full max-w-lg bg-slate-900/60 backdrop-blur-md border border-slate-800 p-4 rounded-3xl shadow-xl transition-all hover:border-tamaraw-gold/30">
-                <p class="text-xs text-slate-400 mb-3 font-medium flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-spotify text-emerald-500 animate-pulse text-sm"></i> Vian's Jam Selection
-                </p>
-                <div class="rounded-2xl overflow-hidden shadow-inner">
-                    <iframe style="border-radius:12px"
-                        src="https://open.spotify.com/embed/playlist/4UC5zXPuLKH5IKVIq5pQn5?utm_source=generator&theme=0"
-                        width="100%" height="80" frameBorder="0" allowfullscreen=""
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"></iframe>
-                </div>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="mt-12 text-slate-500 animate-bounce">
-                <a href="#About" aria-label="Scroll to About Me"><i
-                        class="fa-solid fa-chevron-down text-xl hover:text-tamaraw-gold transition-colors"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT ME SECTION -->
-    <section id="About" class="py-24 bg-slate-950 relative border-t border-slate-900">
-        <div class="containers-section max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-extrabold tracking-wide mb-3 inline-block relative">
-                    ABOUT ME
-                    <span
-                        class="absolute bottom-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-tamaraw-green to-tamaraw-gold rounded-full"></span>
-                </h2>
-                <p class="text-slate-400 max-w-2xl mx-auto mt-4 text-sm md:text-base leading-relaxed">
-                    Dedicated web programmer passionate about developing sleek responsive experiences and high-quality
-                    utility architectures.
+    <section id="About" class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-white mb-4">ABOUT ME</h2>
+            <p class="text-neutral-500 max-w-lg mx-auto text-sm">Dedicated web programmer passionate about developing sleek responsive experiences and high-quality utility architectures.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass p-8 rounded-2xl">
+                <h3 class="text-white font-bold mb-4">Hello! I'm Vian.</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                    I am currently taking a college degree at <span class="text-white font-bold">Far Eastern University - Institute of Technology (FEU Tech)</span>, pursuing a Bachelor of Science in Information Technology, major in Web and Mobile Application Development.
                 </p>
+                <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                    I enjoy building functional tools that streamline day-to-day work tasks. My primary goals are building fast interfaces, clean layouts, and mastering full-stack web architectures.
+                </p>
+                <a href="#" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold bg-brand-yellow text-black px-6 py-3 rounded-lg hover:bg-white transition">Download CV <i class="fa-solid fa-download"></i></a>
             </div>
 
-            <!-- Content Row -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-
-                <!-- Main Intro Card -->
-                <div
-                    class="lg:col-span-7 bg-slate-900/40 border border-slate-800/80 p-8 md:p-10 rounded-3xl backdrop-blur-sm shadow-xl">
-                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
-                        <span class="text-tamaraw-gold font-bold text-xl block mb-2">Hello! I'm Vian.</span>
-                        I am currently taking a college degree at <span class="text-white font-semibold">Far Eastern
-                            University - Institute of Technology (FEU Tech)</span>, pursuing a Bachelor of Science in
-                        Information Technology, major in Web and Mobile Application Development. Proud to be a Tamaraw!
-                        🔰
-                    </p>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        I enjoy building functional tools that streamline day-to-day work tasks. My primary goals are
-                        building fast interfaces, clean layouts, and mastering full-stack web architectures.
-                    </p>
-
-                    <!-- Interactive Download CV action -->
-                    <div class="pt-4">
-                        <button onclick="handleDownloadCV()"
-                            class="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-tamaraw-green to-tamaraw-gold p-0.5 font-bold text-white transition-all duration-300 hover:text-darkBg focus:outline-none">
-                            <span
-                                class="absolute inset-0 bg-gradient-to-r from-tamaraw-gold to-tamaraw-green transition-all duration-500 ease-out opacity-0 group-hover:opacity-100"></span>
-                            <span
-                                class="relative flex items-center gap-2 rounded-[10px] bg-slate-950 px-6 py-3 transition-colors duration-300 ease-out group-hover:bg-opacity-0">
-                                Download CV <i
-                                    class="fa-solid fa-download group-hover:translate-y-0.5 transition-transform"></i>
-                            </span>
-                        </button>
+            <div class="flex flex-col gap-6">
+                <div class="glass p-6 rounded-2xl">
+                    <h3 class="text-white font-bold mb-6 flex items-center gap-2"><i class="fa-solid fa-user text-brand-yellow"></i> Personal Information</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-neutral-500">Name:</span> <span class="text-white">Vian Rotciv DR Tibay</span></div>
+                        <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-neutral-500">Phone:</span> <span class="text-white">(+63) 0955-433-6333</span></div>
+                        <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-neutral-500">Email:</span> <span class="text-white">vtibay40@gmail.com</span></div>
+                        <div class="flex justify-between"><span class="text-neutral-500">Location:</span> <span class="text-white">Manila, Philippines</span></div>
                     </div>
                 </div>
 
-                <!-- Personal Information & Hobbies column -->
-                <div class="lg:col-span-5 flex flex-col gap-8">
-                    <!-- Personal info list -->
-                    <div class="bg-slate-900/40 border border-slate-800/80 p-8 rounded-3xl shadow-xl">
-                        <h3 class="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-                            <i class="fa-solid fa-address-card text-tamaraw-gold"></i> Personal Information
-                        </h3>
-                        <ul class="space-y-4 text-sm">
-                            <li class="flex justify-between border-b border-slate-800 pb-2">
-                                <span class="text-slate-400 font-medium">Name:</span>
-                                <span class="text-slate-200 font-semibold text-right">Vian Rotciv DR Tibay</span>
-                            </li>
-                            <li class="flex justify-between border-b border-slate-800 pb-2">
-                                <span class="text-slate-400 font-medium">Phone:</span>
-                                <span class="text-slate-200 font-semibold text-right">(+63) 0955-433-6333</span>
-                            </li>
-                            <li class="flex justify-between border-b border-slate-800 pb-2">
-                                <span class="text-slate-400 font-medium">Email:</span>
-                                <span
-                                    class="text-slate-200 font-semibold text-right hover:text-tamaraw-gold transition-colors">
-                                    <a href="mailto:vtibay40@gmail.com">vtibay40@gmail.com</a>
-                                </span>
-                            </li>
-                            <li class="flex justify-between border-b border-slate-800 pb-2">
-                                <span class="text-slate-400 font-medium">Location:</span>
-                                <span class="text-slate-200 font-semibold text-right">Manila, Philippines</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span class="text-slate-400 font-medium">Status:</span>
-                                <span
-                                    class="px-2.5 py-0.5 bg-tamaraw-gold/15 text-tamaraw-gold text-xs rounded-md font-bold">Filipino</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Hobbies / Interest Grid -->
-                    <div class="bg-slate-900/40 border border-slate-800/80 p-8 rounded-3xl shadow-xl">
-                        <h3 class="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-                            <i class="fa-solid fa-cube text-tamaraw-gold"></i> Hobbies & Interests
-                        </h3>
-                        <div class="grid grid-cols-3 gap-3">
-                            <div
-                                class="flex flex-col items-center justify-center p-4 bg-slate-950/80 border border-slate-800 rounded-2xl hover:border-tamaraw-gold/45 transition-colors group">
-                                <i
-                                    class="fa-solid fa-gamepad text-2xl text-slate-400 group-hover:text-tamaraw-gold transition-colors mb-2"></i>
-                                <span class="text-xs font-semibold text-slate-300">GAMES</span>
-                            </div>
-                            <div
-                                class="flex flex-col items-center justify-center p-4 bg-slate-950/80 border border-slate-800 rounded-2xl hover:border-tamaraw-gold/45 transition-colors group">
-                                <i
-                                    class="fa-solid fa-headphones text-2xl text-slate-400 group-hover:text-tamaraw-gold transition-colors mb-2"></i>
-                                <span class="text-xs font-semibold text-slate-300">MUSIC</span>
-                            </div>
-                            <div
-                                class="flex flex-col items-center justify-center p-4 bg-slate-950/80 border border-slate-800 rounded-2xl hover:border-tamaraw-gold/45 transition-colors group">
-                                <i
-                                    class="fa-solid fa-plane text-2xl text-slate-400 group-hover:text-tamaraw-gold transition-colors mb-2"></i>
-                                <span class="text-xs font-semibold text-slate-300">TRAVEL</span>
-                            </div>
-                        </div>
+                <div class="glass p-6 rounded-2xl">
+                    <h3 class="text-white font-bold mb-6 flex items-center gap-2"><i class="fa-solid fa-cube text-brand-yellow"></i> Hobbies & Interests</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="flex flex-col items-center justify-center p-4 bg-neutral-900 rounded-xl text-neutral-400 hover:text-brand-yellow transition"><i class="fa-solid fa-gamepad text-xl mb-2"></i><span class="text-[9px] uppercase font-bold">Games</span></div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-neutral-900 rounded-xl text-neutral-400 hover:text-brand-yellow transition"><i class="fa-solid fa-headphones text-xl mb-2"></i><span class="text-[9px] uppercase font-bold">Music</span></div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-neutral-900 rounded-xl text-neutral-400 hover:text-brand-yellow transition"><i class="fa-solid fa-plane text-xl mb-2"></i><span class="text-[9px] uppercase font-bold">Travel</span></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
-    <section id="Projects" class="py-24 bg-slate-900 relative">
-        <div class="containers-section max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-extrabold tracking-wide mb-3 inline-block relative">
-                    FEATURED PROJECTS
-                    <span
-                        class="absolute bottom-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-tamaraw-green to-tamaraw-gold rounded-full"></span>
-                </h2>
-                <p class="text-slate-400 max-w-2xl mx-auto mt-4 text-sm md:text-base leading-relaxed">
-                    Check out some of the early-stage development applications. Each built utilizing responsive
-                    paradigms.
-                </p>
+    <footer class="py-12 px-6 border-t border-white/5 mt-20">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <p class="text-neutral-600 text-[10px] uppercase font-bold tracking-widest">&copy; 2026 SHUSHI. All rights reserved.</p>
+            <div class="flex gap-4 text-neutral-400">
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-solid fa-envelope"></i></a>
+                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-neutral-800 hover:border-brand-yellow hover:text-brand-yellow transition-all duration-300 hover:-translate-y-1"><i class="fa-brands fa-github"></i></a>
             </div>
-
-            <!-- Responsive grid layout with optimized aspect-ratios and visual safety features -->
-            <div class="fila grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-                <!-- Project Card 1 -->
-                <div class="col group">
-                    <div
-                        class="card h-full flex flex-col overflow-hidden rounded-3xl bg-slate-950 border border-slate-800/80 hover:border-tamaraw-gold/50 shadow-lg shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-black/50">
-                        <div class="relative overflow-hidden aspect-video bg-slate-800">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60 z-10">
-                            </div>
-                            <img src="./asset/img/1.png" alt="Portfolio Project Screenshot"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80'">
-                            <span
-                                class="absolute top-4 right-4 z-20 px-3 py-1 bg-tamaraw-green/90 backdrop-blur-md text-emerald-400 text-xs font-bold rounded-full">
-                                Web
-                            </span>
-                        </div>
-                        <div class="contenido-card p-6 flex flex-col flex-grow">
-                            <h3
-                                class="text-xl font-bold text-slate-100 group-hover:text-tamaraw-gold transition-colors mb-2">
-                                Portfolio</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">My primary responsive
-                                showcase portfolio utilizing utility alignments, clean semantic tags, and scroll
-                                controllers.</p>
-                            <a href="https://shushi3017.github.io/Portfolio/" target="_blank"
-                                class="w-full text-center rounded-xl bg-slate-900 border border-slate-800 hover:border-tamaraw-gold/30 hover:bg-tamaraw-gold hover:text-darkBg px-4 py-2.5 font-bold text-sm text-slate-300 transition duration-300 flex items-center justify-center gap-2">
-                                Launch Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Card 2 -->
-                <div class="col group">
-                    <div
-                        class="card h-full flex flex-col overflow-hidden rounded-3xl bg-slate-950 border border-slate-800/80 hover:border-tamaraw-gold/50 shadow-lg shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-black/50">
-                        <div class="relative overflow-hidden aspect-video bg-slate-800">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60 z-10">
-                            </div>
-                            <img src="./asset/img/2.png" alt="Calculator Project Screenshot"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&w=600&q=80'">
-                            <span
-                                class="absolute top-4 right-4 z-20 px-3 py-1 bg-indigo-500/80 backdrop-blur-md text-indigo-200 text-xs font-bold rounded-full">
-                                Utility
-                            </span>
-                        </div>
-                        <div class="contenido-card p-6 flex flex-col flex-grow">
-                            <h3
-                                class="text-xl font-bold text-slate-100 group-hover:text-tamaraw-gold transition-colors mb-2">
-                                Calculator</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">A sleek minimalist
-                                client-side digital calculator application complete with float and arithmetic
-                                calculations.</p>
-                            <a href="https://shushi3017.github.io/Calculator/" target="_blank"
-                                class="w-full text-center rounded-xl bg-slate-900 border border-slate-800 hover:border-tamaraw-gold/30 hover:bg-tamaraw-gold hover:text-darkBg px-4 py-2.5 font-bold text-sm text-slate-300 transition duration-300 flex items-center justify-center gap-2">
-                                Launch App <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Card 3 -->
-                <div class="col group">
-                    <div
-                        class="card h-full flex flex-col overflow-hidden rounded-3xl bg-slate-950 border border-slate-800/80 hover:border-tamaraw-gold/50 shadow-lg shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-black/50">
-                        <div class="relative overflow-hidden aspect-video bg-slate-800">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60 z-10">
-                            </div>
-                            <img src="./asset/img/3.png" alt="To-Do List Project Screenshot"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540350390103-f75294341a82?auto=format&fit=crop&w=600&q=80'">
-                            <span
-                                class="absolute top-4 right-4 z-20 px-3 py-1 bg-amber-500/80 backdrop-blur-md text-amber-100 text-xs font-bold rounded-full">
-                                Productivity
-                            </span>
-                        </div>
-                        <div class="contenido-card p-6 flex flex-col flex-grow">
-                            <h3
-                                class="text-xl font-bold text-slate-100 group-hover:text-tamaraw-gold transition-colors mb-2">
-                                To-Do List</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">An interactive task planner
-                                allowing task lists construction, deletions, and active task complete toggle status.</p>
-                            <a href="https://shushi3017.github.io/To-Do-List/" target="_blank"
-                                class="w-full text-center rounded-xl bg-slate-900 border border-slate-800 hover:border-tamaraw-gold/30 hover:bg-tamaraw-gold hover:text-darkBg px-4 py-2.5 font-bold text-sm text-slate-300 transition duration-300 flex items-center justify-center gap-2">
-                                Launch App <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 border-t border-slate-900 py-12 relative">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-
-            <div class="text-center md:text-left">
-                <p class="text-sm text-slate-400">&copy; 2026 Vian Tibay. Created with Tailwind CSS & ❤️</p>
-                <p class="text-[11px] text-slate-600 mt-1">Bachelor of Science in Information Technology (FEU Tech)</p>
-            </div>
-
-            <!-- Premium Animated Social Icons -->
-            <div class="redes flex items-center gap-4">
-                <a href="https://www.facebook.com/profile.php?id=100077750267944" target="_blank"
-                    class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 hover:-translate-y-1 transition duration-300"
-                    aria-label="Facebook Link">
-                    <i class="fa-brands fa-facebook-f text-sm"></i>
-                </a>
-                <a href="https://discord.com/users/9926" target="_blank"
-                    class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 hover:-translate-y-1 transition duration-300"
-                    aria-label="Discord Link">
-                    <i class="fa-brands fa-discord text-sm"></i>
-                </a>
-                <a href="mailto:vtibay40@gmail.com"
-                    class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-rose-600 hover:-translate-y-1 transition duration-300"
-                    aria-label="Email Link">
-                    <i class="fas fa-envelope text-sm"></i>
-                </a>
-                <a href="https://github.com/Shushi3017" target="_blank"
-                    class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 hover:-translate-y-1 transition duration-300"
-                    aria-label="Github Link">
-                    <i class="fa-brands fa-github text-sm"></i>
-                </a>
-            </div>
-        </div>
-
-        <!-- Float back-to-top button -->
-        <div class="fixed bottom-6 right-6 z-40">
-            <a href="#Home" id="back-to-top"
-                class="hidden w-12 h-12 bg-tamaraw-gold text-darkBg hover:bg-yellow-300 font-extrabold flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 hover:-translate-y-1"
-                aria-label="Scroll to top">
-                <i class="fa-solid fa-angles-up"></i>
-            </a>
         </div>
     </footer>
 
-    <!-- MOCK DOWNLOAD MODAL / POPUP -->
-    <div id="cv-modal"
-        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden">
-        <div
-            class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative">
-            <button onclick="closeCVModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div
-                class="w-16 h-16 bg-tamaraw-gold/10 text-tamaraw-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fa-solid fa-file-pdf text-3xl"></i>
-            </div>
-            <h4 class="text-xl font-bold text-white mb-2">Download CV Portfolio</h4>
-            <p class="text-slate-400 text-sm mb-6">You are about to download the latest curriculum vitae of Vian Tibay.
-            </p>
-            <div class="flex gap-3">
-                <button onclick="closeCVModal()"
-                    class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 text-sm font-semibold transition">Cancel</button>
-                <button onclick="simulateCVDownload()"
-                    class="flex-1 py-2.5 rounded-xl bg-tamaraw-gold hover:bg-yellow-400 text-darkBg text-sm font-bold transition">Download</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN INTERACTIVE LOGIC -->
     <script>
-        // DOM Elements
-        const headerContainer = document.getElementById('header-container');
-        const mainHeader = document.getElementById('main-header');
-        const mobileNav = document.getElementById('mobile-nav');
-        const menuIconBars = document.getElementById('menu-icon-bars');
-        const menuIconClose = document.getElementById('menu-icon-close');
-        const backToTopBtn = document.getElementById('back-to-top');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('section');
-
-        // Compressed scroll actions
+        // Nav shrink effect
         window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-
-            // 1. Shrink header and make transparent
-            if (scrollPos > 40) {
-                headerContainer.classList.add('bg-slate-950/80', 'backdrop-blur-xl', 'shadow-2xl', 'border-b', 'border-slate-800/60');
-                mainHeader.classList.remove('h-24');
-                mainHeader.classList.add('h-16');
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-compressed');
             } else {
-                headerContainer.classList.remove('bg-slate-950/80', 'backdrop-blur-xl', 'shadow-2xl', 'border-b', 'border-slate-800/60');
-                mainHeader.classList.remove('h-16');
-                mainHeader.classList.add('h-24');
+                nav.classList.remove('nav-compressed');
             }
-
-            // 2. Show/Hide back-to-top button
-            if (scrollPos > 300) {
-                backToTopBtn.classList.remove('hidden');
-                backToTopBtn.classList.add('flex');
-            } else {
-                backToTopBtn.classList.remove('flex');
-                backToTopBtn.classList.add('hidden');
-            }
-
-            // 3. Highlight navigation link dynamically
-            let currentSectionId = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 120;
-                const sectionHeight = section.offsetHeight;
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                const targetId = link.getAttribute('data-section');
-                const underLine = link.querySelector('span');
-                if (targetId === currentSectionId) {
-                    link.classList.add('text-tamaraw-gold');
-                    link.classList.remove('text-slate-300');
-                    if (underLine) underLine.classList.replace('w-0', 'w-full');
-                } else {
-                    link.classList.remove('text-tamaraw-gold');
-                    link.classList.add('text-slate-300');
-                    if (underLine) underLine.classList.replace('w-full', 'w-0');
-                }
-            });
         });
 
-        // Toggle mobile responsive menu open/close states
-        function mostrarOcultarMenu() {
-            const isHidden = mobileNav.classList.contains('hidden');
-            if (isHidden) {
-                mobileNav.classList.remove('hidden');
-                menuIconBars.classList.add('hidden');
-                menuIconClose.classList.remove('hidden');
-            } else {
-                cerrarMenu();
-            }
-        }
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        // Close mobile dropdown helper
-        function cerrarMenu() {
-            mobileNav.classList.add('hidden');
-            menuIconBars.classList.remove('hidden');
-            menuIconClose.classList.add('hidden');
-        }
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('invisible', 'opacity-0');
+            mobileMenu.classList.add('opacity-100', 'visible');
+        });
 
-        // Navigation click event triggered by mobile links
-        function seleccionar(targetId) {
-            cerrarMenu();
-            // Smooth scroll to the section
-            const targetSec = document.getElementById(targetId);
-            if (targetSec) {
-                window.scrollTo({
-                    top: targetSec.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        }
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('opacity-100', 'visible');
+            mobileMenu.classList.add('invisible', 'opacity-0');
+        });
 
-        // Custom CV Action Modals
-        function handleDownloadCV() {
-            document.getElementById('cv-modal').classList.remove('hidden');
-        }
-
-        function closeCVModal() {
-            document.getElementById('cv-modal').classList.add('hidden');
-        }
-
-        function simulateCVDownload() {
-            closeCVModal();
-            // Perform simulated secure browser trigger
-            const placeholderLink = document.createElement('a');
-            placeholderLink.href = '#';
-            placeholderLink.setAttribute('download', 'Vian_Tibay_CV.pdf');
-            document.body.appendChild(placeholderLink);
-
-            // Create toast notice to confirm download action triggers
-            const notice = document.createElement('div');
-            notice.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 z-[200] bg-tamaraw-green border border-emerald-400 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold animate-bounce';
-            notice.innerHTML = `<i class="fa-solid fa-circle-check text-tamaraw-gold text-lg"></i> CV Download Triggered Successfully!`;
-            document.body.appendChild(notice);
-
-            setTimeout(() => {
-                notice.remove();
-            }, 3000);
-        }
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('opacity-100', 'visible');
+                mobileMenu.classList.add('invisible', 'opacity-0');
+            });
+        });
     </script>
 </body>
-
 </html>
